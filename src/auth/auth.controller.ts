@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Options, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { createAuthDto } from './dto';
 
@@ -7,6 +7,11 @@ export class AuthController {
     constructor(
         private readonly authService: AuthService
     ) { }
+
+    @Options('*')
+    handlePreflight() {
+        return;
+    }
 
     @Post('register')
     register(@Body() dto: createAuthDto) {
