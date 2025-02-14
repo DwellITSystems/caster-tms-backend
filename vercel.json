@@ -10,10 +10,7 @@
         {
             "src": "/(.*)",
             "headers": {
-                "Access-Control-Allow-Origin": "https://caster-tms-frontend.vercel.app",
-                "Access-Control-Allow-Methods": "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
-                "Access-Control-Allow-Headers": "Content-Type, Authorization",
-                "Access-Control-Allow-Credentials": "true"
+                "Access-Control-Allow-Origin": "*"
             },
             "dest": "src/main.ts",
             "methods": [
