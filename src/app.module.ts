@@ -27,7 +27,7 @@ import { CorsMiddleware } from './middleware/cors.middleware';
   providers: [AppService],
 })
 export class AppModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(CorsMiddleware).forRoutes('*');
-  }
+  // configure(consumer: MiddlewareConsumer) {
+  //   consumer.apply(CorsMiddleware).forRoutes('*');
+  // }
 }
