@@ -20,7 +20,7 @@ export class createUserDto {
     })
     password?: string;
 
-    @IsNotEmpty({ message: 'Last name is required' })
+    @IsNotEmpty({ message: 'Mobile Number is required' })
     @IsString()
     phoneNumber?: string;
 
