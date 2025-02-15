@@ -1,9 +1,9 @@
 import { IsBoolean, IsNotEmpty, IsOptional, IsString } from "class-validator";
 
-export class updateCompanyDto {
+export class updateDriverDto {
     @IsOptional()
     @IsString()
-    companyName: string;
+    name: string;
 
     @IsOptional()
     @IsString()
@@ -21,13 +21,9 @@ export class updateCompanyDto {
     @IsString()
     pincode?: string;
 
-    @IsOptional()
+    @IsNotEmpty()
     @IsString()
-    gstNo?: string;
-
-    @IsOptional()
-    @IsBoolean()
-    contactName?: string;
+    licence: string;
 
     @IsNotEmpty()
     @IsString()

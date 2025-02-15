@@ -1,9 +1,9 @@
 import { IsBoolean, IsNotEmpty, IsString, Matches } from "class-validator";
 
-export class createCompanyDto {
-    @IsNotEmpty({ message: 'Company Name is required' })
+export class createDriverDto {
+    @IsNotEmpty({ message: 'Name is required' })
     @IsString()
-    companyName: string;
+    name: string;
 
     @IsNotEmpty({ message: 'Address is required' })
     @IsString()
@@ -21,13 +21,9 @@ export class createCompanyDto {
     @IsString()
     pincode?: string;
 
-    @IsNotEmpty({ message: 'GST Number is required' })
+    @IsNotEmpty({ message: 'Licence is required' })
     @IsString()
-    gstNo?: string;
-
-    @IsNotEmpty({ message: 'Contact name is required' })
-    @IsString()
-    contactName?: string;
+    licence?: string;
 
     @IsNotEmpty({ message: 'Mobile Number is required' })
     @IsString()

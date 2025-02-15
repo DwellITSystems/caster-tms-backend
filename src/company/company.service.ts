@@ -12,7 +12,16 @@ export class CompanyService {
     ) { }
 
     async createCompany(dto: createCompanyDto) {
-        const { companyName, address, gstNo, contactName, mobileNumber } = dto;
+        const {
+            companyName,
+            address,
+            city,
+            state,
+            pincode,
+            gstNo,
+            contactName,
+            mobileNumber
+        } = dto;
         const existingCompany = await this.companyModel.findOne({ companyName: companyName }).exec();
 
         if (existingCompany) {
@@ -22,6 +31,9 @@ export class CompanyService {
         const company = new this.companyModel({
             companyName: companyName,
             address: address,
+            city: city,
+            state: state,
+            pincode: pincode,
             gstNo: gstNo,
             contactName: contactName,
             mobileNumber: mobileNumber

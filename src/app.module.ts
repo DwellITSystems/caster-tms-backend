@@ -7,6 +7,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { CorsMiddleware } from './middleware/cors.middleware';
 import { CompanyModule } from './company/company.module';
+import { DriverModule } from './driver/driver.module';
 
 @Module({
   imports: [
@@ -24,7 +25,8 @@ import { CompanyModule } from './company/company.module';
     ),
     UsersModule,
     AuthModule,
-    CompanyModule],
+    CompanyModule,
+    DriverModule],
   controllers: [AppController],
   providers: [AppService],
 })

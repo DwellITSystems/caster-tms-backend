@@ -3,9 +3,9 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 @Schema({
     timestamps: true,
 })
-export class Company {
-    @Prop({ unique: true, required: true })
-    companyName: string;
+export class Driver {
+    @Prop({ required: true })
+    name: string;
 
     @Prop({ required: true })
     address?: string;
@@ -19,14 +19,11 @@ export class Company {
     @Prop({ required: true })
     pincode?: string;
 
-    @Prop({ required: true })
-    gstNo?: string;
-
-    @Prop({ required: true })
-    contactName?: string;
+    @Prop({ unique: true, required: true })
+    licence?: string;
 
     @Prop({ required: true })
     mobileNumber?: string;
 }
 
-export const companySchema = SchemaFactory.createForClass(Company);
+export const driverSchema = SchemaFactory.createForClass(Driver);
