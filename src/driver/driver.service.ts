@@ -48,7 +48,7 @@ export class DriverService {
         }
     }
 
-    async getCompanyById(id: string): Promise<Driver | null> {
+    async getDriverById(id: string): Promise<Driver | null> {
         try {
             return await this.driverModel.findById(id);
         } catch (error) {
@@ -56,7 +56,7 @@ export class DriverService {
         }
     }
 
-    async updateCompany(id: string, dto: createDriverDto): Promise<Driver | null> {
+    async updateDriver(id: string, dto: createDriverDto): Promise<Driver | null> {
         try {
             return await this.driverModel.findByIdAndUpdate(id, dto, { new: true });
         } catch (error) {
@@ -64,7 +64,7 @@ export class DriverService {
         }
     }
 
-    async deleteCompany(id: string): Promise<Driver | null> {
+    async deleteDriver(id: string): Promise<Driver | null> {
         try {
             return await this.driverModel.findByIdAndDelete(id);
         } catch (error) {
