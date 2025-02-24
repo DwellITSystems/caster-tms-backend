@@ -26,10 +26,10 @@ export class updateCompanyDto {
     gstNo?: string;
 
     @IsOptional()
-    @IsBoolean()
+    @IsString()
     contactName?: string;
 
     @IsNotEmpty()
     @IsString()
-    mobileNumber: string;
+    phoneNumber: string;
 }

@@ -53,6 +53,7 @@ export class updateVehicleDto {
     @IsString()
     vehicleTon?: string;
 
+    @IsOptional()
     @IsString()
     bata?: string;
 }

@@ -27,5 +27,5 @@ export class updateDriverDto {
 
     @IsNotEmpty()
     @IsString()
-    mobileNumber: string;
+    phoneNumber: string;
 }

@@ -19,7 +19,7 @@ export class DriverService {
             state,
             pincode,
             licence,
-            mobileNumber
+            phoneNumber
         } = dto;
         const existingCompany = await this.driverModel.findOne({ licence: licence }).exec();
 
@@ -34,7 +34,7 @@ export class DriverService {
             state: state,
             pincode: pincode,
             licence: licence,
-            mobileNumber: mobileNumber
+            phoneNumber: phoneNumber
         });
 
         return driver.save();
@@ -43,6 +43,20 @@ export class DriverService {
     async getDriver(): Promise<Driver | any> {
         try {
             return await this.driverModel.find().exec();
+        } catch (error) {
+            throw new ForbiddenException(error.message);
+        }
+    }
+
+    async getDriverDuplicate(licence: string): Promise<Driver | any> {
+        try {
+            const existingDriver = await this.driverModel.findOne({ licence: { $regex: new RegExp(`^${licence}$`, "i") } }).exec();
+            if (existingDriver) {
+                throw new ConflictException('Driver already exists!');
+            }
+            else {
+                return true;
+            }
         } catch (error) {
             throw new ForbiddenException(error.message);
         }

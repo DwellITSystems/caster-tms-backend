@@ -17,6 +17,11 @@ export class DriverController {
         return this.driverService.createDriver(dto);
     }
 
+    @Get('driver-check/:id')
+    async getDriverDuplicate(@Param('id') id: string) {
+        return await this.driverService.getDriverDuplicate(id);
+    }
+
     @Get()
     async getDriver() {
         return await this.driverService.getDriver();

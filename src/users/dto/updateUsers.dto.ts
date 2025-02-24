@@ -14,18 +14,14 @@ export class updateUserDto {
     lastName?: string;
 
     @IsOptional()
-    @IsBoolean()
-    isAdmin?: boolean;
-
-    @IsNotEmpty()
     @IsString()
     password: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     mfaSecret: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     isMfaEnabled: string;
 }

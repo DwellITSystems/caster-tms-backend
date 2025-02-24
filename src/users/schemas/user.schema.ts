@@ -23,6 +23,15 @@ export class User {
     @Prop({ required: true })
     address?: string;
 
+    @Prop({ required: true })
+    state?: string;
+
+    @Prop({ required: true })
+    city?: string;
+
+    @Prop({ required: true })
+    pincode?: string;
+
     // @Prop({ required: true })
     // avatar?: string;
 

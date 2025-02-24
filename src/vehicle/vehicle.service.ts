@@ -54,6 +54,20 @@ export class VehicleService {
         return vehicleDetails.save();
     }
 
+    async getVehicleDuplicate(vehicleNo: string): Promise<Vehicle | any> {
+        try {
+            const existingUser = await this.vehicleModel.findOne({ vehicleNo: { $regex: new RegExp(`^${vehicleNo}$`, "i") } }).exec();
+            if (existingUser) {
+                throw new ConflictException('Vehicle already exists!');
+            }
+            else {
+                return true;
+            }
+        } catch (error) {
+            throw new ForbiddenException(error.message);
+        }
+    }
+
     async getVehicle(): Promise<Vehicle | any> {
         try {
             return await this.vehicleModel.find().exec();

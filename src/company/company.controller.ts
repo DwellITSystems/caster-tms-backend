@@ -18,6 +18,11 @@ export class CompanyController {
         return this.companyService.createCompany(dto);
     }
 
+    @Get('company-check/:id')
+    async getCompanyDuplicate(@Param('id') id: string) {
+        return await this.companyService.getCompanyDuplicate(id);
+    }
+
     @Get()
     async getCompany() {
         return await this.companyService.getCompany();

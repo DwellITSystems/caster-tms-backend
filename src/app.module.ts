@@ -9,6 +9,7 @@ import { CorsMiddleware } from './middleware/cors.middleware';
 import { CompanyModule } from './company/company.module';
 import { DriverModule } from './driver/driver.module';
 import { VehicleModule } from './vehicle/vehicle.module';
+import { TripModule } from './trip/trip.module';
 
 @Module({
   imports: [
@@ -28,7 +29,8 @@ import { VehicleModule } from './vehicle/vehicle.module';
     AuthModule,
     CompanyModule,
     DriverModule,
-    VehicleModule],
+    VehicleModule,
+    TripModule],
   controllers: [AppController],
   providers: [AppService],
 })

@@ -27,5 +27,5 @@ export class createDriverDto {
 
     @IsNotEmpty({ message: 'Mobile Number is required' })
     @IsString()
-    mobileNumber?: string;
+    phoneNumber?: string;
 }

@@ -28,6 +28,18 @@ export class createAuthDto {
     @IsString()
     address?: string;
 
+    @IsNotEmpty({ message: 'State is required' })
+    @IsString()
+    state?: string;
+
+    @IsNotEmpty({ message: 'City is required' })
+    @IsString()
+    city?: string;
+
+    @IsNotEmpty({ message: 'Pincode is required' })
+    @IsString()
+    pincode?: string;
+
     @IsNotEmpty({ message: 'Role is required' })
     @IsString()
     role?: string;

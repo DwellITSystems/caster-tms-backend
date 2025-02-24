@@ -23,7 +23,7 @@ export class Driver {
     licence?: string;
 
     @Prop({ required: true })
-    mobileNumber?: string;
+    phoneNumber?: string;
 }
 
 export const driverSchema = SchemaFactory.createForClass(Driver);

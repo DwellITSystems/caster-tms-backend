@@ -29,7 +29,7 @@ export class createCompanyDto {
     @IsString()
     contactName?: string;
 
-    @IsNotEmpty({ message: 'Mobile Number is required' })
+    @IsNotEmpty({ message: 'Phone Number is required' })
     @IsString()
-    mobileNumber?: string;
+    phoneNumber?: string;
 }

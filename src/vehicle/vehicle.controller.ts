@@ -22,6 +22,11 @@ export class VehicleController {
         return await this.vehicleService.getVehicle();
     }
 
+    @Get('vehicle-check/:id')
+    async getVehicleDuplicate(@Param('id') id: string) {
+        return await this.vehicleService.getVehicleDuplicate(id);
+    }
+
     @Get(':id')
     async getVehicleById(@Param('id') id: string) {
         const isValid = mongoose.Types.ObjectId.isValid(id);

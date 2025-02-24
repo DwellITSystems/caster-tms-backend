@@ -26,7 +26,7 @@ export class Company {
     contactName?: string;
 
     @Prop({ required: true })
-    mobileNumber?: string;
+    phoneNumber?: string;
 }
 
 export const companySchema = SchemaFactory.createForClass(Company);

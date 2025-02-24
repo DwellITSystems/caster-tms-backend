@@ -45,7 +45,7 @@ export class Vehicle {
     vehicleTon: string;
 
     @Prop()
-    bata: string;
+    bata?: string;
 
 }
 

@@ -20,7 +20,7 @@ export class CompanyService {
             pincode,
             gstNo,
             contactName,
-            mobileNumber
+            phoneNumber
         } = dto;
         const existingCompany = await this.companyModel.findOne({ companyName: companyName }).exec();
 
@@ -36,10 +36,24 @@ export class CompanyService {
             pincode: pincode,
             gstNo: gstNo,
             contactName: contactName,
-            mobileNumber: mobileNumber
+            phoneNumber: phoneNumber
         });
 
         return company.save();
+    }
+
+    async getCompanyDuplicate(companyName: string): Promise<Company | any> {
+        try {
+            const existingCompany = await this.companyModel.findOne({ companyName: { $regex: new RegExp(`^${companyName}$`, "i") } }).exec();
+            if (existingCompany) {
+                throw new ConflictException('Company already exists!');
+            }
+            else {
+                return true;
+            }
+        } catch (error) {
+            throw new ForbiddenException(error.message);
+        }
     }
 
     async getCompany(): Promise<Company | any> {
