@@ -1,4 +1,4 @@
-import { IsBoolean, IsNotEmpty, IsOptional, IsString } from "class-validator";
+import { IsBoolean, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
 
 export class updateDriverDto {
     @IsOptional()
@@ -21,11 +21,23 @@ export class updateDriverDto {
     @IsString()
     pincode?: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     licence: string;
 
-    @IsNotEmpty()
+    @IsOptional()
     @IsString()
     phoneNumber: string;
+
+    @IsOptional()
+    @IsNumber()
+    driverBatta?: number;
+
+    @IsOptional()
+    @IsNumber()
+    driverAdvance?: number;
+
+    @IsOptional()
+    @IsNumber()
+    driverBataBalance?: number;
 }

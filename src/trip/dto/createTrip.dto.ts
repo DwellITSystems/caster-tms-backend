@@ -1,167 +1,192 @@
-import { IsBoolean, IsNotEmpty, IsString, Matches } from "class-validator";
+import { IsBoolean, IsNotEmpty, IsNumber, IsOptional, IsString, Matches } from "class-validator";
 
 export class createTripDto {
-    @IsNotEmpty({ message: 'Date is required' })
-    @IsString()
-    date: string;
 
-    @IsNotEmpty({ message: 'Trip starting place is required' })
+    @IsNotEmpty({ message: 'uniqueID is required' })
+    @IsString()
+    uniqueID?: string;
+
+    @IsNotEmpty({ message: 'date is required' })
+    @IsString()
+    date?: string;
+
+    @IsNotEmpty({ message: 'trip starting place is required' })
     @IsString()
     tripStartingPlace?: string;
 
-    @IsNotEmpty({ message: 'Trip ending Place is required' })
+    @IsNotEmpty({ message: 'trip ending Place is required' })
     @IsString()
     tripEndingPlace?: string;
+
+    @IsBoolean()
+    @IsOptional()
+    ownVehicle?: boolean;
 
     @IsNotEmpty({ message: 'vehicle number is required' })
     @IsString()
     vehicleNumber?: string;
 
-    @IsNotEmpty({ message: 'Last name is required' })
     @IsString()
-    driverName: string;
+    @IsOptional()
+    driverId?: string;
 
-    @IsNotEmpty({ message: 'Last name is required' })
     @IsString()
-    driverPhoneNo: string;
+    @IsOptional()
+    driverName?: string;
 
-    @IsNotEmpty({ message: 'Last name is required' })
     @IsString()
-    driverBatta: string;
+    @IsOptional()
+    driverPhoneNo?: string;
 
-    @IsNotEmpty({ message: 'Last name is required' })
-    @IsString()
-    driverAdvance: string;
+    @IsNumber({}, { message: "driverBatta must be a number" })
+    @IsOptional()
+    driverBatta?: number;
 
-    @IsNotEmpty({ message: 'Last name is required' })
-    @IsString()
-    driverBataBalance: string;
+    @IsNumber({}, { message: "driverAdvance must be a number" })
+    @IsOptional()
+    driverAdvance?: number;
 
-    @IsNotEmpty({ message: 'Last name is required' })
-    @IsString()
-    startingKM: string;
+    @IsNumber()
+    @IsOptional()
+    driverBataBalance?: number;
 
-    @IsNotEmpty({ message: 'Last name is required' })
     @IsString()
-    dieselCost: string;
+    @IsOptional()
+    startingKM?: string;
 
-    @IsNotEmpty({ message: 'Last name is required' })
+    @IsNumber()
+    @IsOptional()
+    dieselCost?: number;
+
     @IsString()
+    @IsOptional()
     vehicleOwnerDriverPhoneNo?: string;
 
-    @IsNotEmpty({ message: 'First name is required' })
     @IsString()
+    @IsOptional()
     vehicleOwnerDriverName?: string;
 
-    @IsNotEmpty({ message: 'Last name is required' })
+    @IsNotEmpty({ message: 'vehicle type is required' })
     @IsString()
     vehicleType?: string;
 
-    @IsNotEmpty({ message: 'First name is required' })
+    @IsNotEmpty({ message: 'check point charge is required' })
     @IsString()
     checkpointCharge?: string;
 
-    @IsNotEmpty({ message: 'Last name is required' })
+    @IsNotEmpty({ message: 'halt charge is required' })
     @IsString()
     haltCharge?: string;
 
-    @IsNotEmpty({ message: 'First name is required' })
-    @IsString()
-    rent?: string;
+    @IsNotEmpty({ message: 'rent is required' })
+    @IsNumber()
+    rent?: number;
 
-    @IsNotEmpty({ message: 'Last name is required' })
+    @IsNotEmpty({ message: 'unloading charge is required' })
     @IsString()
     unloadingCharge?: string;
 
-    @IsNotEmpty({ message: 'First name is required' })
+    @IsNotEmpty({ message: 'commission is required' })
     @IsString()
     commission?: string;
 
-    @IsNotEmpty({ message: 'Last name is required' })
-    @IsString()
-    vehicleAdvance?: string;
+    @IsBoolean()
+    @IsOptional()
+    vehicleAdvanceActive: boolean;
 
-    @IsNotEmpty({ message: 'First name is required' })
-    @IsString()
-    vehicleBalance?: string;
+    @IsNotEmpty({ message: 'vehicle advance is required' })
+    @IsNumber()
+    vehicleAdvance?: number;
 
-    @IsNotEmpty({ message: 'Last name is required' })
+    @IsNumber()
+    @IsOptional()
+    vehicleBalance?: number;
+
     @IsString()
+    @IsOptional()
     vehicleRemark?: string;
 
-    @IsNotEmpty({ message: 'First name is required' })
+    @IsNotEmpty({ message: 'company name is required' })
     @IsString()
     companyName?: string;
 
-    @IsNotEmpty({ message: 'Last name is required' })
+    @IsOptional()
+    @IsBoolean()
+    lrNoActive?: boolean;
+
     @IsString()
+    @IsOptional()
     lrno?: string;
 
-    @IsNotEmpty({ message: 'Last name is required' })
     @IsString()
+    @IsOptional()
     invoiceAmount?: string;
 
-    @IsNotEmpty({ message: 'Last name is required' })
     @IsString()
+    @IsOptional()
     gst?: string;
 
-    @IsNotEmpty({ message: 'Last name is required' })
     @IsString()
+    @IsOptional()
     fromAddress?: string;
 
-    @IsNotEmpty({ message: 'Last name is required' })
     @IsString()
+    @IsOptional()
     toAddress?: string;
 
-    @IsNotEmpty({ message: 'Last name is required' })
     @IsString()
+    @IsOptional()
     goods?: string;
 
-    @IsNotEmpty({ message: 'Mobile Number is required' })
+    @IsNotEmpty({ message: 'weight is required' })
     @IsString()
     weight?: string;
 
-    @IsNotEmpty({ message: 'Address is required' })
+    @IsNotEmpty({ message: 'total fright charge is required' })
     @IsString()
     totalFrightCharge?: string;
 
-    @IsNotEmpty({ message: 'State is required' })
+    @IsNotEmpty({ message: 'fright advance is required' })
     @IsString()
     frightAdvance?: string;
 
-    @IsNotEmpty({ message: 'City is required' })
+    @IsNotEmpty({ message: 'credit account is required' })
     @IsString()
     creditAccount?: string;
 
-    @IsNotEmpty({ message: 'Pincode is required' })
-    @IsString()
-    frightchargebalance?: string;
+    @IsNotEmpty({ message: 'fright charge balance is required' })
+    @IsNumber()
+    frightchargebalance?: number;
 
-    @IsNotEmpty({ message: 'Role is required' })
+    @IsNotEmpty({ message: 'bill amount is required' })
     @IsString()
     billAmount?: string;
 
-    @IsNotEmpty({ message: 'Role is required' })
     @IsString()
+    @IsOptional()
     companyRemark?: string;
 
-    @IsNotEmpty({ message: 'Role is required' })
     @IsString()
+    @IsOptional()
     vehiclePayment?: string;
 
-    @IsNotEmpty({ message: 'Role is required' })
+    @IsNotEmpty({ message: 'company payment is required' })
     @IsString()
     companyPayment?: string;
 
-    @IsNotEmpty({ message: 'Role is required' })
+    @IsOptional()
+    @IsString()
+    bataPayment?: string;
+
+    @IsNotEmpty({ message: 'trip status required' })
     @IsString()
     tripStatus?: string;
 
-    @IsNotEmpty({ message: 'Role is required' })
-    @IsString()
-    tripTotalExpence?: string;
+    @IsNotEmpty({ message: 'trip total expence is required' })
+    @IsNumber()
+    tripTotalExpence?: number;
 
-    @IsNotEmpty({ message: 'Role is required' })
-    @IsString()
-    tripProfit?: string;
+    @IsNotEmpty({ message: 'trip profit is required' })
+    @IsNumber()
+    tripProfit?: number;
 }

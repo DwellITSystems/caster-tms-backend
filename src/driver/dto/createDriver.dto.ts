@@ -1,4 +1,4 @@
-import { IsBoolean, IsNotEmpty, IsString, Matches } from "class-validator";
+import { IsBoolean, IsNotEmpty, IsNumber, IsOptional, IsString, Matches } from "class-validator";
 
 export class createDriverDto {
     @IsNotEmpty({ message: 'Name is required' })
@@ -28,4 +28,16 @@ export class createDriverDto {
     @IsNotEmpty({ message: 'Mobile Number is required' })
     @IsString()
     phoneNumber?: string;
+
+    @IsNumber()
+    @IsOptional()
+    driverBatta?: number;
+
+    @IsNumber()
+    @IsOptional()
+    driverAdvance?: number;
+
+    @IsNumber()
+    @IsOptional()
+    driverBataBalance?: number;
 }

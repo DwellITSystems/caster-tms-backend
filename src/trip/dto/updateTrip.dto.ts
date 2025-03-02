@@ -1,6 +1,7 @@
-import { IsOptional, IsString } from "class-validator";
+import { IsBoolean, IsNumber, isNumber, IsOptional, isString, IsString } from "class-validator";
 
 export class updateTripDto {
+
     @IsOptional()
     @IsString()
     date: string;
@@ -13,9 +14,17 @@ export class updateTripDto {
     @IsString()
     tripEndingPlace?: string;
 
+    @IsBoolean()
+    @IsOptional()
+    ownVehicle?: boolean;
+
     @IsOptional()
     @IsString()
     vehicleNumber: string;
+
+    @IsOptional()
+    @IsString()
+    driverId: string;
 
     @IsOptional()
     @IsString()
@@ -26,24 +35,24 @@ export class updateTripDto {
     driverPhoneNo: string;
 
     @IsOptional()
-    @IsString()
-    driverBatta: string;
+    @IsNumber()
+    driverBatta: number;
 
     @IsOptional()
-    @IsString()
-    driverAdvance: string;
+    @IsNumber()
+    driverAdvance: number;
 
     @IsOptional()
-    @IsString()
-    driverBataBalance: string;
+    @IsNumber()
+    driverBataBalance: number;
 
     @IsOptional()
     @IsString()
     startingKM: string;
 
     @IsOptional()
-    @IsString()
-    dieselCost: string;
+    @IsNumber()
+    dieselCost: number;
 
     @IsOptional()
     @IsString()
@@ -66,8 +75,8 @@ export class updateTripDto {
     haltCharge: string;
 
     @IsOptional()
-    @IsString()
-    rent: string;
+    @IsNumber()
+    rent: number;
 
     @IsOptional()
     @IsString()
@@ -81,13 +90,21 @@ export class updateTripDto {
     @IsString()
     vehicleRemark: string;
 
+    @IsBoolean()
     @IsOptional()
-    @IsString()
-    vehicleAdvance: string;
+    vehicleAdvanceActive: boolean;
 
     @IsOptional()
-    @IsString()
-    vehicleBalance: string;
+    @IsNumber()
+    vehicleAdvance: number;
+
+    @IsOptional()
+    @IsNumber()
+    vehicleBalance: number;
+
+    @IsOptional()
+    @IsBoolean()
+    lrNoActive?: boolean;
 
     @IsOptional()
     @IsString()
@@ -130,8 +147,8 @@ export class updateTripDto {
     creditAccount: string;
 
     @IsOptional()
-    @IsString()
-    frightchargebalance: string;
+    @IsNumber()
+    frightchargebalance: number;
 
     @IsOptional()
     @IsString()
@@ -143,10 +160,26 @@ export class updateTripDto {
 
     @IsOptional()
     @IsString()
-    tripStatus: string;
+    vehiclePayment?: string;
 
     @IsOptional()
     @IsString()
-    tripTotalExpence: string;
+    companyPayment?: string;
+
+    @IsOptional()
+    @IsString()
+    bataPayment?: string;
+
+    @IsOptional()
+    @IsString()
+    tripStatus: string;
+
+    @IsOptional()
+    @IsNumber()
+    tripTotalExpence: number;
+
+    @IsOptional()
+    @IsNumber()
+    tripProfit: number;
 
 }

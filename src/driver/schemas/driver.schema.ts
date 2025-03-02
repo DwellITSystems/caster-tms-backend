@@ -24,6 +24,15 @@ export class Driver {
 
     @Prop({ required: true })
     phoneNumber?: string;
+
+    @Prop({ required: false })
+    driverBatta?: number;
+
+    @Prop({ required: false })
+    driverAdvance?: number;
+
+    @Prop({ required: false })
+    driverBataBalance?: number;
 }
 
 export const driverSchema = SchemaFactory.createForClass(Driver);

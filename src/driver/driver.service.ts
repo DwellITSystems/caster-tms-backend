@@ -34,7 +34,10 @@ export class DriverService {
             state: state,
             pincode: pincode,
             licence: licence,
-            phoneNumber: phoneNumber
+            phoneNumber: phoneNumber,
+            driverBatta: 0,
+            driverAdvance: 0,
+            driverBataBalance: 0
         });
 
         return driver.save();

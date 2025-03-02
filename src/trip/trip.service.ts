@@ -3,20 +3,26 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Trip } from './schemas/trip.schema';
 import { Model } from 'mongoose';
 import { createTripDto, updateTripDto } from './dto';
+import { Driver } from 'src/driver/schemas/driver.schema';
+import { updateDriverDto } from 'src/driver/dto';
 
 @Injectable()
 export class TripService {
     constructor(
         @InjectModel(Trip.name)
-        private tripModel: Model<Trip>
+        private tripModel: Model<Trip>,
+        @InjectModel(Driver.name) private driverModel: Model<Driver>,
     ) { }
 
     async createTrip(dto: createTripDto) {
         const {
+            uniqueID,
             date,
             tripStartingPlace,
             tripEndingPlace,
+            ownVehicle,
             vehicleNumber,
+            driverId,
             driverName,
             driverPhoneNo,
             driverBatta,
@@ -32,11 +38,13 @@ export class TripService {
             rent,
             unloadingCharge,
             commission,
+            vehicleAdvanceActive,
             vehicleAdvance,
             vehicleBalance,
             vehicleRemark,
             companyName,
             lrno,
+            lrNoActive,
             invoiceAmount,
             gst,
             fromAddress,
@@ -51,55 +59,93 @@ export class TripService {
             companyRemark,
             vehiclePayment,
             companyPayment,
+            bataPayment,
             tripStatus,
             tripTotalExpence,
             tripProfit
         } = dto;
+
+        // ✅ Fetch driver details safely
+        let drivingDetails;
+        if (driverId) {
+            drivingDetails = await this.driverModel.findById(driverId).exec();
+        }
+
+        // ✅ Ensure we don't add undefined values
+        const _driverBattaCheck = (drivingDetails?.driverBatta || 0) + (driverBatta || 0);
+        const _driverAdvanceCheck = (drivingDetails?.driverAdvance || 0) + (driverAdvance || 0);
+        const _driverBataBalanceCheck =
+            (drivingDetails?.driverAdvance || 0) + (driverAdvance || 0)
+            -
+            ((drivingDetails?.driverBatta || 0) + (driverBatta || 0))
+
+        // ✅ Store the driverId in tripModel
         const trip = new this.tripModel({
-            date: date,
-            tripStartingPlace: tripStartingPlace,
-            tripEndingPlace: tripEndingPlace,
-            vehicleNumber: vehicleNumber,
-            driverName: driverName,
-            driverPhoneNo: driverPhoneNo,
-            driverBatta: driverBatta,
-            driverAdvance: driverAdvance,
-            driverBataBalance: driverBataBalance,
-            startingKM: startingKM,
-            dieselCost: dieselCost,
-            vehicleOwnerDriverPhoneNo: vehicleOwnerDriverPhoneNo,
-            vehicleOwnerDriverName: vehicleOwnerDriverName,
-            vehicleType: vehicleType,
-            checkpointCharge: checkpointCharge,
-            haltCharge: haltCharge,
-            rent: rent,
-            unloadingCharge: unloadingCharge,
-            commission: commission,
-            vehicleAdvance: vehicleAdvance,
-            vehicleBalance: vehicleBalance,
-            vehicleRemark: vehicleRemark,
-            companyName: companyName,
-            lrno: lrno,
-            invoiceAmount: invoiceAmount,
-            gst: gst,
-            fromAddress: fromAddress,
-            toAddress: toAddress,
-            goods: goods,
-            weight: weight,
-            totalFrightCharge: totalFrightCharge,
-            frightAdvance: frightAdvance,
-            creditAccount: creditAccount,
-            frightchargebalance: frightchargebalance,
-            billAmount: billAmount,
-            companyRemark: companyRemark,
-            vehiclePayment: vehiclePayment,
-            companyPayment: companyPayment,
-            tripStatus: tripStatus,
-            tripTotalExpence: tripTotalExpence,
-            tripProfit: tripProfit
+            uniqueID,
+            date,
+            tripStartingPlace,
+            tripEndingPlace,
+            ownVehicle,
+            vehicleNumber,
+            driverId,
+            driverName,
+            driverPhoneNo,
+            driverBatta,
+            driverAdvance,
+            driverBataBalance,
+            startingKM,
+            dieselCost,
+            vehicleOwnerDriverPhoneNo,
+            vehicleOwnerDriverName,
+            vehicleType,
+            checkpointCharge,
+            haltCharge,
+            rent,
+            unloadingCharge,
+            commission,
+            vehicleAdvanceActive,
+            vehicleAdvance,
+            vehicleBalance,
+            vehicleRemark,
+            companyName,
+            lrno,
+            lrNoActive,
+            invoiceAmount,
+            gst,
+            fromAddress,
+            toAddress,
+            goods,
+            weight,
+            totalFrightCharge,
+            frightAdvance,
+            creditAccount,
+            frightchargebalance,
+            billAmount,
+            companyRemark,
+            vehiclePayment,
+            companyPayment,
+            bataPayment,
+            tripStatus,
+            tripTotalExpence,
+            tripProfit
         });
+
+        // ✅ Update driver only if driverId exists
+        if (driverId) {
+            await this.driverModel.findByIdAndUpdate(
+                driverId,
+                {
+                    driverBatta: _driverBattaCheck,
+                    driverAdvance: _driverAdvanceCheck,
+                    driverBataBalance: _driverBataBalanceCheck
+                },
+                { new: true }
+            );
+        }
+
         return trip.save();
     }
+
 
     async getTrip(): Promise<Trip | any> {
         try {

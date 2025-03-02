@@ -4,6 +4,9 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
     timestamps: true,
 })
 export class Trip {
+    @Prop({ unique: true, required: true })
+    uniqueID?: string;
+
     @Prop({ required: true })
     date?: string;
 
@@ -13,34 +16,40 @@ export class Trip {
     @Prop({ required: true })
     tripEndingPlace?: string;
 
-    @Prop({ required: true })
-    driverName?: string;
+    @Prop({ required: false })
+    ownVehicle?: boolean;
 
     @Prop({ required: true })
     vehicleNumber?: string;
 
-    @Prop({ required: true })
+    @Prop({ required: false })
+    driverId?: string;
+
+    @Prop({ required: false })
+    driverName?: string;
+
+    @Prop({ required: false })
     driverPhoneNo?: string;
 
-    @Prop({ required: true })
-    driverBatta?: string;
+    @Prop({ required: false })
+    driverBatta?: number;
 
-    @Prop({ required: true })
-    driverAdvance?: string;
+    @Prop({ required: false })
+    driverAdvance?: number;
 
-    @Prop({ required: true })
-    driverBataBalance?: string;
+    @Prop({ required: false })
+    driverBataBalance?: number;
 
-    @Prop({ required: true })
+    @Prop({ required: false })
     startingKM?: string;
 
-    @Prop({ required: true })
-    dieselCost: string
+    @Prop({ required: false })
+    dieselCost: number
 
-    @Prop({ required: true })
+    @Prop({ required: false })
     vehicleOwnerDriverPhoneNo?: string;
 
-    @Prop({ required: true })
+    @Prop({ required: false })
     vehicleOwnerDriverName?: string;
 
     @Prop({ required: true })
@@ -53,7 +62,7 @@ export class Trip {
     haltCharge?: string;
 
     @Prop({ required: true })
-    rent?: string;
+    rent?: number;
 
     @Prop({ required: true })
     unloadingCharge?: string;
@@ -61,34 +70,40 @@ export class Trip {
     @Prop({ required: true })
     commission?: string;
 
-    @Prop({ required: true })
-    vehicleAdvance?: string;
+    @Prop({ required: false })
+    vehicleAdvanceActive: boolean;
 
     @Prop({ required: true })
-    vehicleBalance?: string;
+    vehicleAdvance?: number;
 
-    @Prop({ required: true })
+    @Prop({ required: false })
+    vehicleBalance?: number;
+
+    @Prop({ required: false })
     vehicleRemark?: string;
 
     @Prop({ required: true })
     companyName?: string;
 
-    @Prop({ required: true })
+    @Prop({ required: false })
+    lrNoActive?: boolean;
+
+    @Prop({ required: false })
     lrno?: string;
 
-    @Prop({ required: true })
+    @Prop({ required: false })
     invoiceAmount?: string;
 
-    @Prop({ required: true })
+    @Prop({ required: false })
     gst?: string;
 
-    @Prop({ required: true })
+    @Prop({ required: false })
     fromAddress?: string;
 
-    @Prop({ required: true })
+    @Prop({ required: false })
     toAddress?: string;
 
-    @Prop({ required: true })
+    @Prop({ required: false })
     goods?: string;
 
     @Prop({ required: true })
@@ -104,15 +119,15 @@ export class Trip {
     creditAccount?: string;
 
     @Prop({ required: true })
-    frightchargebalance?: string;
+    frightchargebalance?: number;
 
     @Prop({ required: true })
     billAmount?: string;
 
-    @Prop({ required: true })
+    @Prop({ required: false })
     companyRemark?: string;
 
-    @Prop({ required: true })
+    @Prop({ required: false })
     vehiclePayment?: string;
 
     @Prop({ required: true })
@@ -121,11 +136,14 @@ export class Trip {
     @Prop({ required: true })
     tripStatus?: string;
 
-    @Prop({ required: true })
-    tripTotalExpence?: string;
+    @Prop({ required: false })
+    bataPayment?: string;
 
     @Prop({ required: true })
-    tripProfit: string;
+    tripTotalExpence?: number;
+
+    @Prop({ required: true })
+    tripProfit: number;
 }
 
 export const tripSchema = SchemaFactory.createForClass(Trip);

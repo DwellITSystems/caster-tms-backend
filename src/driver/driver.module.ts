@@ -14,6 +14,7 @@ import { Driver, driverSchema } from './schemas/driver.schema';
     ])
   ],
   controllers: [DriverController],
-  providers: [DriverService]
+  providers: [DriverService],
+  exports: [MongooseModule]
 })
 export class DriverModule { }
