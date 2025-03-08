@@ -1,4 +1,13 @@
-import { IsBoolean, IsNotEmpty, IsNumber, IsOptional, IsString, Matches } from "class-validator";
+import { Type } from "class-transformer";
+import { IsArray, IsBoolean, IsNotEmpty, IsNumber, IsOptional, IsString, Matches, ValidateNested } from "class-validator";
+
+class RemarkDto {
+    @IsString()
+    name: string;
+
+    @IsString()
+    user: string;
+}
 
 export class createTripDto {
 
@@ -102,9 +111,11 @@ export class createTripDto {
     @IsOptional()
     vehicleBalance?: number;
 
-    @IsString()
     @IsOptional()
-    vehicleRemark?: string;
+    @IsArray()
+    @ValidateNested({ each: true })
+    @Type(() => RemarkDto)
+    vehicleRemark?: RemarkDto[];
 
     @IsNotEmpty({ message: 'company name is required' })
     @IsString()
@@ -162,9 +173,11 @@ export class createTripDto {
     @IsString()
     billAmount?: string;
 
-    @IsString()
     @IsOptional()
-    companyRemark?: string;
+    @IsArray()
+    @ValidateNested({ each: true })
+    @Type(() => RemarkDto)
+    companyRemark?: RemarkDto[];
 
     @IsString()
     @IsOptional()

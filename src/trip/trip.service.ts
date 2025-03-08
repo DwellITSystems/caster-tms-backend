@@ -65,19 +65,10 @@ export class TripService {
             tripProfit
         } = dto;
 
-        // ✅ Fetch driver details safely
-        let drivingDetails;
-        if (driverId) {
-            drivingDetails = await this.driverModel.findById(driverId).exec();
-        }
+        console.log(vehicleRemark)
 
-        // ✅ Ensure we don't add undefined values
-        const _driverBattaCheck = (drivingDetails?.driverBatta || 0) + (driverBatta || 0);
-        const _driverAdvanceCheck = (drivingDetails?.driverAdvance || 0) + (driverAdvance || 0);
-        const _driverBataBalanceCheck =
-            (drivingDetails?.driverAdvance || 0) + (driverAdvance || 0)
-            -
-            ((drivingDetails?.driverBatta || 0) + (driverBatta || 0))
+        const formattedVehicleRemark = Array.isArray(vehicleRemark) ? vehicleRemark : [{ name: vehicleRemark, user: "userview" }];
+        const formattedCompanyRemark = Array.isArray(companyRemark) ? companyRemark : [{ name: companyRemark, user: "userview" }];
 
         // ✅ Store the driverId in tripModel
         const trip = new this.tripModel({
@@ -106,7 +97,7 @@ export class TripService {
             vehicleAdvanceActive,
             vehicleAdvance,
             vehicleBalance,
-            vehicleRemark,
+            vehicleRemark: '',
             companyName,
             lrno,
             lrNoActive,
@@ -121,7 +112,7 @@ export class TripService {
             creditAccount,
             frightchargebalance,
             billAmount,
-            companyRemark,
+            companyRemark: '',
             vehiclePayment,
             companyPayment,
             bataPayment,
@@ -129,20 +120,6 @@ export class TripService {
             tripTotalExpence,
             tripProfit
         });
-
-        // ✅ Update driver only if driverId exists
-        if (driverId) {
-            await this.driverModel.findByIdAndUpdate(
-                driverId,
-                {
-                    driverBatta: _driverBattaCheck,
-                    driverAdvance: _driverAdvanceCheck,
-                    driverBataBalance: _driverBataBalanceCheck
-                },
-                { new: true }
-            );
-        }
-
         return trip.save();
     }
 
