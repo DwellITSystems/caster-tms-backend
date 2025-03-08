@@ -1,6 +1,31 @@
-import { IsBoolean, IsNumber, isNumber, IsOptional, isString, IsString } from "class-validator";
+import { Type } from "class-transformer";
+import { isArray, IsArray, IsBoolean, IsNumber, isNumber, IsOptional, isString, IsString, ValidateNested } from "class-validator";
+
+class UpdatePaymentDto {
+    @IsString()
+    paymenttype: string;
+
+    @IsString()
+    amount: string;
+
+    @IsString()
+    remark: string;
+
+    @IsString()
+    date: string;
+
+    @IsString()
+    user: string;
+}
+
 
 export class updateTripDto {
+
+    @IsOptional()
+    @IsArray()
+    @ValidateNested({ each: true })
+    @Type(() => UpdatePaymentDto)
+    updatePayment?: UpdatePaymentDto[];
 
     @IsOptional()
     @IsString()
@@ -87,8 +112,8 @@ export class updateTripDto {
     commission?: string;
 
     @IsOptional()
-    @IsString()
-    vehicleRemark: string;
+    @IsArray()
+    vehicleRemark: [];
 
     @IsBoolean()
     @IsOptional()
@@ -155,8 +180,8 @@ export class updateTripDto {
     billAmount?: string;
 
     @IsOptional()
-    @IsString()
-    companyRemark?: string;
+    @IsArray()
+    companyRemark?: [];
 
     @IsOptional()
     @IsString()

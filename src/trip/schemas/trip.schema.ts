@@ -84,8 +84,12 @@ export class Trip {
     vehicleBalance?: number;
 
     @Prop({ required: false })
-    @Prop({ type: [{ name: String, date: Date, user: String }], default: [] })
-    vehicleRemark?: { _id: Types.ObjectId; name: string; remarkdate: Date, user: string }[];
+    @Prop({ type: [{ paymenttype: String, amount: Number, remark: String, date: Date, user: String }], default: [] })
+    updatePayment?: { _id: Types.ObjectId; paymenttype: string; amount: Number, remark: string; date: Date; user: String; }[];
+
+    @Prop({ required: false })
+    @Prop({ type: [{ remark: String, date: Date, user: String }], default: [] })
+    vehicleRemark?: { _id: Types.ObjectId; remark: string; date: Date; user: string }[];
 
     @Prop({ required: true })
     companyName?: string;
@@ -130,8 +134,8 @@ export class Trip {
     billAmount?: string;
 
     @Prop({ required: false })
-    @Prop({ type: [{ name: String, date: Date, user: String }], default: [] })
-    companyRemark?: { _id: Types.ObjectId; name: string; remarkdate: Date, user: string }[];
+    @Prop({ type: [{ remark: String, date: Date, user: String }], default: [] })
+    companyRemark?: { _id: Types.ObjectId; remark: string; date: Date, user: string }[];
 
     @Prop({ required: false })
     vehiclePayment?: string;

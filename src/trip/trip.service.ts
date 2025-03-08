@@ -16,6 +16,7 @@ export class TripService {
 
     async createTrip(dto: createTripDto) {
         const {
+            updatePayment,
             uniqueID,
             date,
             tripStartingPlace,
@@ -69,8 +70,8 @@ export class TripService {
         const _vehicleRemark = Array.isArray(vehicleRemark)
             ? vehicleRemark.map(remark => ({
                 _id: new Types.ObjectId(),
-                remark: remark?.name || '',
-                date: remark?.remarkdate ? new Date(remark.remarkdate) : new Date(),
+                remark: remark?.remark || '',
+                date: remark?.date ? new Date(remark.date) : new Date(),
                 user: remark?.user
             }))
             : [];
@@ -79,14 +80,15 @@ export class TripService {
         const _companyRemark = Array.isArray(companyRemark)
             ? companyRemark.map(remark => ({
                 _id: new Types.ObjectId(),
-                remark: remark.name || '',
-                date: remark.remarkdate ? new Date(remark.remarkdate) : new Date(),
+                remark: remark.remark || '',
+                date: remark.date ? new Date(remark.date) : new Date(),
                 user: remark?.user
             }))
             : [];
 
         // ✅ Store the driverId in tripModel
         const trip = new this.tripModel({
+            updatePayment,
             uniqueID,
             date,
             tripStartingPlace,

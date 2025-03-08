@@ -3,16 +3,20 @@ import { IsArray, IsBoolean, IsNotEmpty, IsNumber, IsOptional, IsString, Matches
 
 class RemarkDto {
     @IsString()
-    name: string;
+    remark: string;
 
     @IsString()
-    remarkdate: string;
+    date: string;
 
     @IsString()
     user: string;
 }
 
 export class createTripDto {
+
+    @IsOptional()
+    @IsArray()
+    updatePayment?: []
 
     @IsNotEmpty({ message: 'uniqueID is required' })
     @IsString()
