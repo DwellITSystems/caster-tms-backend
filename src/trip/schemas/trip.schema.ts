@@ -1,8 +1,12 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Type } from "class-transformer";
+import { IsArray, IsOptional, ValidateNested } from "class-validator";
+import { Types } from "mongoose";
 
 @Schema({
     timestamps: true,
 })
+
 export class Trip {
     @Prop({ unique: true, required: true })
     uniqueID?: string;
@@ -80,7 +84,8 @@ export class Trip {
     vehicleBalance?: number;
 
     @Prop({ required: false })
-    vehicleRemark?: string;
+    @Prop({ type: [{ name: String, date: Date, user: String }], default: [] })
+    vehicleRemark?: { _id: Types.ObjectId; name: string; remarkdate: Date, user: string }[];
 
     @Prop({ required: true })
     companyName?: string;
@@ -125,7 +130,8 @@ export class Trip {
     billAmount?: string;
 
     @Prop({ required: false })
-    companyRemark?: string;
+    @Prop({ type: [{ name: String, date: Date, user: String }], default: [] })
+    companyRemark?: { _id: Types.ObjectId; name: string; remarkdate: Date, user: string }[];
 
     @Prop({ required: false })
     vehiclePayment?: string;

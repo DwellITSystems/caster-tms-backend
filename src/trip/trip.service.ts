@@ -1,7 +1,7 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Trip } from './schemas/trip.schema';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { createTripDto, updateTripDto } from './dto';
 import { Driver } from 'src/driver/schemas/driver.schema';
 import { updateDriverDto } from 'src/driver/dto';
@@ -65,10 +65,25 @@ export class TripService {
             tripProfit
         } = dto;
 
-        console.log(vehicleRemark)
+        // ✅ Ensure vehicleRemark is an array of objects
+        const _vehicleRemark = Array.isArray(vehicleRemark)
+            ? vehicleRemark.map(remark => ({
+                _id: new Types.ObjectId(),
+                remark: remark?.name || '',
+                date: remark?.remarkdate ? new Date(remark.remarkdate) : new Date(),
+                user: remark?.user
+            }))
+            : [];
 
-        const formattedVehicleRemark = Array.isArray(vehicleRemark) ? vehicleRemark : [{ name: vehicleRemark, user: "userview" }];
-        const formattedCompanyRemark = Array.isArray(companyRemark) ? companyRemark : [{ name: companyRemark, user: "userview" }];
+        // ✅ Ensure companyRemark is an array of objects
+        const _companyRemark = Array.isArray(companyRemark)
+            ? companyRemark.map(remark => ({
+                _id: new Types.ObjectId(),
+                remark: remark.name || '',
+                date: remark.remarkdate ? new Date(remark.remarkdate) : new Date(),
+                user: remark?.user
+            }))
+            : [];
 
         // ✅ Store the driverId in tripModel
         const trip = new this.tripModel({
@@ -97,7 +112,7 @@ export class TripService {
             vehicleAdvanceActive,
             vehicleAdvance,
             vehicleBalance,
-            vehicleRemark: '',
+            vehicleRemark: _vehicleRemark,
             companyName,
             lrno,
             lrNoActive,
@@ -112,7 +127,7 @@ export class TripService {
             creditAccount,
             frightchargebalance,
             billAmount,
-            companyRemark: '',
+            companyRemark: _companyRemark,
             vehiclePayment,
             companyPayment,
             bataPayment,
@@ -120,6 +135,7 @@ export class TripService {
             tripTotalExpence,
             tripProfit
         });
+
         return trip.save();
     }
 

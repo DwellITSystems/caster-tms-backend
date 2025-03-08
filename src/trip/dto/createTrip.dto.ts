@@ -6,6 +6,9 @@ class RemarkDto {
     name: string;
 
     @IsString()
+    remarkdate: string;
+
+    @IsString()
     user: string;
 }
 
