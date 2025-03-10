@@ -1,7 +1,8 @@
-import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, Options, Param, Patch, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, Options, Param, Patch, Post, UploadedFile, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
 import { TripService } from './trip.service';
 import { createTripDto, updateTripDto } from './dto';
 import mongoose from 'mongoose';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('trip')
 export class TripController {
@@ -15,6 +16,17 @@ export class TripController {
     @Post('create')
     async createTrip(@Body() dto: createTripDto) {
         return this.tripService.createTrip(dto);
+    }
+
+    @Post('upload')
+    @UseInterceptors(FileInterceptor("file"))
+    async processExcelFile(@UploadedFile() file: Express.Multer.File) {
+        if (!file) {
+            return { message: "No file uploaded" };
+        }
+
+        const result = await this.tripService.processExcelFile(file.buffer);
+        return { message: "File processed successfully", data: result };
     }
 
     @Get()

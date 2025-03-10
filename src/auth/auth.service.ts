@@ -28,7 +28,7 @@ export class AuthService {
         }
 
         const saltRounds = 10;
-        const hashedPassword = await bcrypt.hash(password, saltRounds);
+        const hashedPassword = await bcrypt.hash(password, saltRounds.toString());
         const user = new this.userModel({
             userName: userName,
             password: hashedPassword,

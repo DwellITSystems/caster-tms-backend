@@ -12,6 +12,9 @@ export class Trip {
     uniqueID?: string;
 
     @Prop({ required: true })
+    userName?: string;
+
+    @Prop({ required: true })
     date?: string;
 
     @Prop({ required: true })

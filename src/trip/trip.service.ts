@@ -5,6 +5,7 @@ import { Model, Types } from 'mongoose';
 import { createTripDto, updateTripDto } from './dto';
 import { Driver } from 'src/driver/schemas/driver.schema';
 import { updateDriverDto } from 'src/driver/dto';
+import * as XLSX from "xlsx";
 
 @Injectable()
 export class TripService {
@@ -18,6 +19,7 @@ export class TripService {
         const {
             updatePayment,
             uniqueID,
+            userName,
             date,
             tripStartingPlace,
             tripEndingPlace,
@@ -90,6 +92,7 @@ export class TripService {
         const trip = new this.tripModel({
             updatePayment,
             uniqueID,
+            userName,
             date,
             tripStartingPlace,
             tripEndingPlace,
@@ -141,6 +144,20 @@ export class TripService {
         return trip.save();
     }
 
+    async processExcelFile(buffer: Buffer): Promise<any> {
+        const workbook = XLSX.read(buffer, { type: "buffer" });
+        const sheetName = workbook.SheetNames[0];
+        const sheet = workbook.Sheets[sheetName];
+
+        const jsonData = XLSX.utils.sheet_to_json(sheet);
+
+        const cleanedData = jsonData.map((doc) => {
+            const { _id, ...rest } = doc as any;
+            return rest;
+        });
+
+        return await this.tripModel.insertMany(cleanedData);
+    }
 
     async getTrip(): Promise<Trip | any> {
         try {

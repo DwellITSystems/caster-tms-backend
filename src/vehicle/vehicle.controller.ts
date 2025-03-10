@@ -1,7 +1,8 @@
-import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, Options, Param, Patch, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, Options, Param, Patch, Post, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { VehicleService } from './vehicle.service';
 import { createVehicleDto, updateVehicleDto } from './dto';
 import mongoose from 'mongoose';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
 @Controller('vehicle')
 export class VehicleController {
@@ -13,11 +14,13 @@ export class VehicleController {
     }
 
     @Post('create')
+    @UseGuards(JwtAuthGuard)
     async createVehicle(@Body() dto: createVehicleDto) {
         return this.vehicleService.createVehicle(dto);
     }
 
     @Get()
+    //@UseGuards(JwtAuthGuard)
     async getVehicle() {
         return await this.vehicleService.getVehicle();
     }

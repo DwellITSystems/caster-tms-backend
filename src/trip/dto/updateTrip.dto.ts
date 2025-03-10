@@ -33,6 +33,10 @@ export class updateTripDto {
 
     @IsOptional()
     @IsString()
+    userName: string;
+
+    @IsOptional()
+    @IsString()
     tripStartingPlace?: string;
 
     @IsOptional()

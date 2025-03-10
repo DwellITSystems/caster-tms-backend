@@ -18,6 +18,10 @@ export class createTripDto {
     @IsArray()
     updatePayment?: []
 
+    @IsNotEmpty({ message: 'username is required' })
+    @IsString()
+    userName?: string;
+
     @IsNotEmpty({ message: 'uniqueID is required' })
     @IsString()
     uniqueID?: string;
