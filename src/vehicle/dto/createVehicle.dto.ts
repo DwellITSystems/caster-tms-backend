@@ -45,6 +45,10 @@ export class createVehicleDto {
     @IsString()
     tyreChangeKM?: string;
 
+    @IsNotEmpty({ message: 'Tyre Change Date is required' })
+    @IsString()
+    tyreChangeDate?: string;
+
     @IsNotEmpty({ message: 'Vehicle Type is required' })
     @IsString()
     vehicleType?: string;

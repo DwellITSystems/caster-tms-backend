@@ -24,6 +24,7 @@ export class VehicleService {
             totalKM,
             serviceDueDate,
             tyreChangeKM,
+            tyreChangeDate,
             vehicleType,
             vehicleTon,
             bata
@@ -46,6 +47,7 @@ export class VehicleService {
             totalKM,
             serviceDueDate,
             tyreChangeKM,
+            tyreChangeDate,
             vehicleType,
             vehicleTon,
             bata

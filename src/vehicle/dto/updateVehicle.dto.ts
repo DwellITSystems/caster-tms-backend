@@ -47,6 +47,10 @@ export class updateVehicleDto {
 
     @IsOptional()
     @IsString()
+    tyreChangeDate?: string;
+
+    @IsOptional()
+    @IsString()
     vehicleType?: string;
 
     @IsOptional()

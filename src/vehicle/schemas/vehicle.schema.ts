@@ -39,6 +39,9 @@ export class Vehicle {
     tyreChangeKM: string;
 
     @Prop({ required: true })
+    tyreChangeDate: string;
+
+    @Prop({ required: true })
     vehicleType: string;
 
     @Prop({ required: true })
