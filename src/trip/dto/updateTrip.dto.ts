@@ -80,8 +80,8 @@ export class updateTripDto {
     startingKM: string;
 
     @IsOptional()
-    @IsNumber()
-    dieselCost: number;
+    @IsString()
+    dieselCost?: string;
 
     @IsOptional()
     @IsString()
@@ -106,6 +106,10 @@ export class updateTripDto {
     @IsOptional()
     @IsNumber()
     rent: number;
+
+    @IsOptional()
+    @IsString()
+    haltRent: string;
 
     @IsOptional()
     @IsString()

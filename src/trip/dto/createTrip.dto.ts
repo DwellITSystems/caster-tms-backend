@@ -74,9 +74,9 @@ export class createTripDto {
     @IsOptional()
     startingKM?: string;
 
-    @IsNumber()
+    @IsString()
     @IsOptional()
-    dieselCost?: number;
+    dieselCost?: string;
 
     @IsString()
     @IsOptional()
@@ -101,6 +101,10 @@ export class createTripDto {
     @IsNotEmpty({ message: 'rent is required' })
     @IsNumber()
     rent?: number;
+
+    @IsOptional()
+    @IsString()
+    haltRent?: string;
 
     @IsNotEmpty({ message: 'unloading charge is required' })
     @IsString()
